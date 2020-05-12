@@ -2,6 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.core.exceptions import ObjectDoesNotExist, SuspiciousOperation
 from django.contrib.auth.decorators import login_required
+from django.db.models import Sum
 
 from datetime import datetime
 
@@ -13,6 +14,7 @@ from .utils import do_donate
 def index(request):
     now = datetime.now()
     context = {
+            'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
             'current_events': (Event.objects.filter(start_time__lte=now)
                                             .filter(end_time__gte=now)
                                             .order_by('start_time')),
@@ -24,12 +26,14 @@ def index(request):
 
 def about(request):
     context = {
+        'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         'clubs': Club.objects.all(),
     }
     return render(request, 'about.html', context)
 
 def leaderboard_overview(request):
     context = {
+        'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         'attendees': Attendee.objects.all().order_by('-balance__cumulative')[:3],
         'events': Event.objects.all().order_by('-balance__balance')[:5],
         'clubs': Club.objects.all().order_by('-balance__balance')[:3],
@@ -38,18 +42,21 @@ def leaderboard_overview(request):
 
 def leaderboard_by_attendee(request):
     context = {
+        'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         'attendees': Attendee.objects.all().order_by('-balance__cumulative'),
     }
     return render(request, 'leaderboards/by_attendee.html', context)
 
 def leaderboard_by_event(request):
     context = {
+        'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         'events': Event.objects.all().order_by('-balance__balance'),
     }
     return render(request, 'leaderboards/by_event.html', context)
 
 def leaderboard_by_club(request):
     context = {
+        'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         'clubs': Club.objects.all().order_by('-balance__balance'),
     }
     return render(request, 'leaderboards/by_club.html', context)
@@ -57,6 +64,7 @@ def leaderboard_by_club(request):
 def event_list(request):
     now = datetime.now()
     context = {
+        'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         'current_events': (Event.objects.filter(start_time__lte=now)
                                         .filter(end_time__gte=now)
                                         .order_by('start_time')),
@@ -71,6 +79,7 @@ def event_list(request):
 def event_details(request, event):
     try:
         context = {
+            'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
             'event': Event.objects.get(ref_name=event),
         }
         return render(request, 'event_details.html', context)
@@ -81,6 +90,7 @@ def event_details(request, event):
 def club_details(request, club):
     try:
         context = {
+            'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
             'club': Club.objects.get(ref_name=club),
         }
         return render(request, 'club.html', context)
@@ -102,6 +112,7 @@ def donate(request):
 
     elif request.method == 'GET':
         context = {
+            'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
             'events': Event.objects.all(),
             'selected': request.GET.get('event'),
         }
@@ -109,4 +120,7 @@ def donate(request):
 
 @login_required(login_url='attendee/login')
 def pay(request):
-    return render(request, 'pay.html')
+    context = {
+        'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
+    }
+    return render(request, 'pay.html', context)

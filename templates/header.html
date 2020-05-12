@@ -1,6 +1,6 @@
 <div id="header-content">
     {% if user.is_authenticated %}
-    <span>Balance: <strong id="acct_balance">$20.00</strong></span>
+    <span>Balance: <strong id="acct_balance">${{ user.attendee_info.balance.balance }}</strong></span>
     <div class="button-vstack">
         <a href="/attendee/profile"><button class="button-info">Profile</button></a>
         <a href="/attendee/logout"><button class="button-warn">Logout</button></a>
