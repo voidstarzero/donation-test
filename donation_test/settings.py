@@ -25,7 +25,7 @@ SECRET_KEY = '8+=z&uh6_f$4trq84=d0t@i4q1t!93*+1l(w08h&=#trw-d9v@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['donation-test.arcus.id.au', 'redback.lan']
+ALLOWED_HOSTS = ['charityunvigil.online', 'redback.lan']
 
 # Application definition
 
