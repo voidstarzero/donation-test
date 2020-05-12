@@ -20,53 +20,24 @@
 </section>
 <section>
     <h2>What's On?</h2>
+    <div class="multi-table">
+        {% for event in events %}
+        <div class="multi-row">
+            <a href="/events/{{ event.ref_name }}">{{ event.full_name }}</a>
+            <span>
+                {% with organizers=event.organizers.all %}
+                {% for organizer in organizers %}
+                {{ organizer.short_name }}{% if not forloop.last %},{% endif %}
+                {% endfor %}
+                {% endwith %}
+            </span>
+            <span>{{ event.start_time|date:"d/m, H:i" }} &ndash; {{ event.end_time|date:"d/m, H:i" }}</span>
+        </div>
+        {% endfor %}
+    </div>
     <h3>Right Now</h3>
-    <div class="multi-table">
-        <div class="multi-row">
-            <a href="/events/d_d_oneshot">D&D Oneshot</a>
-            <span>Unigames</span>
-            <span>8:30 pm - 9:30 pm</span>
-        </div>
-        <div class="multi-row">
-            <a href="/events/screencheat">Screencheat</a>
-            <span>UCC</span>
-            <span>9:00 pm - 9:30 pm</span>
-        </div>
-        <div class="multi-row">
-            <a href="/events/really_long">Really Long Event Name to see if things break</a>
-            <span>UCC</span>
-            <span>9:00 pm - 10:00 pm</span>
-        </div>
-    </div>
     <h3>Coming Up</h3>
-    <div class="multi-table">
-        <div class="multi-row">
-            <a href="/events/book_club">Book Club</a>
-            <span>Unisfa</span>
-            <span>9:30 pm - 10:30 pm</span>
-        </div>
-        <div class="multi-row">
-            <a href="/events/really_long_2">Really Long Event Name to see if things break</a>
-            <span>UCC</span>
-            <span>11:00 pm - 12:00 am</span>
-        </div>
-        <div class="multi-row">
-            <a href="/events/artemis">Artemis</a>
-            <span>UCC, Unigames, Unisfa</span>
-            <span>9:45 pm - 10:30 pm</span>
-        </div>
-    </div>
     <h3>All Night Long</h3>
-    <div class="multi-table">
-        <div class="multi-row">
-            <a href="/events/minecraft">Minecraft with Friends</a>
-            <span>UCC, Unigames, Unisfa</span>
-        </div>
-        <div class="multi-row">
-            <a href="/events/pcs_contest">Programming unContest</a>
-            <span>PCS</span>
-        </div>
-    </div>
     <p><a href="/events/list">More events...</a></p>
     <p><a href="/leaderboards/by_event">See event leaderboard...</a></p>
 </section>

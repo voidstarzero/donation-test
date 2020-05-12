@@ -3,6 +3,8 @@ from django.shortcuts import render
 from django.core.exceptions import ObjectDoesNotExist, SuspiciousOperation
 from django.contrib.auth.decorators import login_required
 
+from datetime import datetime as dt
+
 from .models import Club, Event, Attendee
 from .utils import do_donate
 
@@ -10,6 +12,7 @@ from .utils import do_donate
 
 def index(request):
     context = {
+            'events': Event.objects.filter(end_time__gte=dt.now()).order_by('start_time')[:5],
             'attendees': Attendee.objects.all().order_by('-balance__cumulative')[:3],
     }
     return render(request, 'index.html', context)
