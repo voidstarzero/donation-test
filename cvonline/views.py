@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.core.exceptions import ObjectDoesNotExist, SuspiciousOperation
 from django.contrib.auth.decorators import login_required
 
-from datetime import datetime as dt
+from datetime import datetime
 
 from .models import Club, Event, Attendee
 from .utils import do_donate
@@ -11,8 +11,13 @@ from .utils import do_donate
 # Views are all preliminary until templates are refined
 
 def index(request):
+    now = datetime.now()
     context = {
-            'events': Event.objects.filter(end_time__gte=dt.now()).order_by('start_time')[:5],
+            'current_events': (Event.objects.filter(start_time__lte=now)
+                                            .filter(end_time__gte=now)
+                                            .order_by('start_time')),
+            'upcoming_events': (Event.objects.filter(start_time__gte=now)
+                                             .order_by('start_time'))[:5],
             'attendees': Attendee.objects.all().order_by('-balance__cumulative')[:3],
     }
     return render(request, 'index.html', context)
