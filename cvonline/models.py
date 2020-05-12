@@ -3,16 +3,6 @@ from django.contrib import auth
 
 User = auth.get_user_model()
 
-class Club(models.Model):
-    ref_name    = models.CharField(primary_key=True, max_length=15, blank=False, null=False)
-    short_name  = models.CharField(max_length=15, null=False)
-    full_name   = models.CharField(max_length=120, null=False)
-    page_link   = models.CharField(max_length=120, blank=False)
-    description = models.TextField(null=False)
-
-    def __str__(self):
-        return self.full_name
-
 # Holds the current balance for Attendees and Events
 # For attendee: Undonated & total money
 # For event: Total donations
@@ -26,6 +16,17 @@ class Balance(models.Model):
         return '{}: ${} (${})'.format(self.id, self.balance, self.cumulative)
 
 # Holds extra information not stored in the User model
+class Club(models.Model):
+    ref_name    = models.CharField(primary_key=True, max_length=15, blank=False, null=False)
+    short_name  = models.CharField(max_length=15, null=False)
+    full_name   = models.CharField(max_length=120, null=False)
+    page_link   = models.CharField(max_length=120, blank=False)
+    description = models.TextField(null=False)
+    balance     = models.OneToOneField(Balance, related_name='club_owner', on_delete=models.PROTECT, null=True)
+
+    def __str__(self):
+        return self.full_name
+
 class Attendee(models.Model):
     user    = models.OneToOneField(User, primary_key=True, related_name='attendee_info', on_delete=models.CASCADE)
     balance = models.OneToOneField(Balance, related_name='attendee_owner', on_delete=models.PROTECT, null=True)

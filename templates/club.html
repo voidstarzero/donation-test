@@ -7,7 +7,7 @@
     <div class="content-columns">
         <div>
             <h1>{{ club.full_name }}</h1>
-            <p><strong>Raised so far:</strong> $666.66</p>
+            <p><strong>Raised so far:</strong> ${{ club.balance.balance }}</p>
         </div>
         <div class="logo-container">
             <img src="/static/logos/{{ club.ref_name }}.png" alt="Logo for {{ club.full_name }}" class="logo">
