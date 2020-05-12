@@ -10,6 +10,7 @@
     Are you sure you want to logout?
     </p>
     <form method="post">
+        {% csrf_token %}
         <div class="input-div">
             <input type="submit" value="Logout" class="button-good">
         </div>

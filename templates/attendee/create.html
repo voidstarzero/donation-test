@@ -13,6 +13,7 @@
     </a>
     </p>
     <form method="post">
+        {% csrf_token %}
         <div class="pad-bottom">
             <label for="username-field">Username:</label>
             <input name="username" id="username-field" type="text"
