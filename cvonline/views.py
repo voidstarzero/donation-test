@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.core.exceptions import ObjectDoesNotExist, SuspiciousOperation
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
+import django.contrib.auth as auth
 
 from datetime import datetime
 
@@ -148,10 +149,15 @@ def login(request):
 
 @login_required(login_url='/attendee/login')
 def logout(request):
-    context = {
-        'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
-    }
-    return render(request, 'attendee/logout.html', context)
+    if request.method == 'POST':
+        auth.logout(request)
+        return HttpResponseRedirect('/')        
+
+    elif request.method == 'GET':
+        context = {
+            'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
+        }
+        return render(request, 'attendee/logout.html', context)
 
 @login_required(login_url='/attendee/login')
 def attendee_profile(request):
