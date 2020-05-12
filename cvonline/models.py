@@ -35,12 +35,12 @@ class Event(models.Model):
 
 # From Attendees, to Events
 class Donation(models.Model):
-    amount      = models.IntegerField(null=False, blank=False)
-    user_from   = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='donations', null=True)
-    event_to    = models.ForeignKey(Event, on_delete=models.SET_NULL, related_name='donations', null=True)
-    timestamp   = models.DateTimeField(auto_now_add=True)
+    amount          = models.IntegerField(null=False, blank=False)
+    attendee_from   = models.ForeignKey(Attendee, on_delete=models.SET_NULL, related_name='donations', null=True)
+    event_to        = models.ForeignKey(Event, on_delete=models.SET_NULL, related_name='donations', null=True)
+    timestamp       = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        user = self.user_from
+        attendee = self.attendee_from
         event = self.event_to
-        return '{} to {} ({})'.format(user.username, event.full_name, self.amount)
+        return '{} to {} ({})'.format(attendee.user.username, event.full_name, self.amount)
