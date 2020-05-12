@@ -160,10 +160,3 @@ def attendee_profile(request):
         'attendee': Attendee.objects.get(user=request.user.id),
     }
     return render(request, 'attendee/profile.html', context)
-
-@login_forbidden(redirect_to='/attendee/logout')
-def reset_password(request):
-    context = {
-        'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
-    }
-    return render(request, 'attendee/reset_password.html', context)

@@ -36,6 +36,5 @@ urlpatterns = [
     path('attendee/login', views.login, name='login'),
     path('attendee/logout', views.logout, name='logout'),
     path('attendee/profile', views.attendee_profile, name='attendee_profile'),
-    path('attendee/reset_password', views.reset_password, name='reset_password'),
     path('admin/', admin.site.urls), # leave to allow access to prebuilt admin site
 ]
