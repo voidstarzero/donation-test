@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Leaderboard - Charity unVigil Donation Tracker</title>
+        <link rel="stylesheet" href="/static/main.css">
+    </head>
+    <body>
+        <div id="fixed-banner">
+            <div class="edge-padding">
+                <header>
+                    <div id="header-content">
+                        <span>Balance: <strong id="acct_balance">$20.00</strong></span>
+                        <div class="button-vstack">
+                            <a href="/attendee/profile"><button class="button-info">Profile</button></a>
+                            <a href="/attendee/logout"><button class="button-warn">Logout</button></a>
+                        </div>
+                        <a href="/donate"><button id="button-donate" class="button-good">Donate!</button></a>
+                    </div>
+                </header>
+            </div>
+        </div>
+        <div id="scroll-content">
+            <div class="edge-padding">
+                <main>
+                    <section>
+                        <p id="donation-total">
+                            <strong>$123.45</strong> raised so far. Keep up the good work everyone!
+                        </p>
+                    </section>
+                    <section>
+                        <h1>Charity <sup>un</sup>Vigil Leaderboard</h1>
+                    </section>
+                    <section>
+                        <h2>Top Events</h2>
+                        <div class="multi-table">
+                            <div class="multi-row">
+                                <a href="/events/d_d_oneshot">D&D Oneshot</a>
+                                <span>Unigames</span>
+                                <span>8:30 pm - 9:30 pm</span>
+                            </div>
+                            <div class="multi-row">
+                                <a href="/events/screencheat">Screencheat</a>
+                                <span>UCC</span>
+                                <span>9:00 pm - 9:30 pm</span>
+                            </div>
+                            <div class="multi-row">
+                                <a href="/events/really_long">Really Long Event Name to see if things break</a>
+                                <span>UCC</span>
+                                <span>9:00 pm - 10:00 pm</span>
+                            </div>
+                        </div>
+                        <p><a href="/leaderboards/by_event">Show more...</a></p>
+                    </section>
+                    <section>
+                        <h2>Top Clubs</h3>
+                        <div class="multi-table">
+                            <div class="multi-row">
+                                <span><a href="/clubs/unigames">Unigames</a></span>
+                                <strong>$1234.56</strong>
+                            </div>
+                            <div class="multi-row">
+                                <span><a href="/clubs/unisfa">Unisfa</a></span>
+                                <strong>$675.45</strong>
+                            </div>
+                            <div class="multi-row">
+                                <span><a href="/clubs/ucc">UCC</a></span>
+                                <strong>$435.30</strong>
+                            </div>
+                            <div class="multi-row">
+                                <span><a href="/clubs/pcs">PCS</a></span>
+                                <strong>$123.43</strong>
+                            </div>
+                        </div>
+                        <p><a href="/leaderboards/by_club">Show more...</a></p>
+                    </section>
+                    <section>
+                        <h2>Top Donors</h2>
+                        <div class="multi-table">
+                            <div class="multi-row">
+                                <span>Michael Jackson</span>
+                                <strong>$1234.56</strong>
+                            </div>
+                            <div class="multi-row">
+                                <span>Dame Judy Dench</span>
+                                <strong>$74.12</strong>
+                            </div>
+                            <div class="multi-row">
+                                <span>Cathy Freeman</span>
+                                <strong>$33.30</strong>
+                            </div>
+                        </div>
+                        <p><a href="/leaderboards/by_attendee">Show more...</a></p>
+                    </section>
+                    <section>
+                        <p><a href="/">Go back...</a></p>
+                    </section>
+                </main>
+                <footer>
+                    <div id="footer-content">
+                        <em>Made by Felix von Perger and James Arcus</em>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Create an Account - Charity unVigil Donation Tracker</title>
+        <link rel="stylesheet" href="/static/main.css">
+    </head>
+    <body>
+        <div id="fixed-banner">
+            <div class="edge-padding">
+                <header>
+                    <div id="header-content">
+                        <span>Balance: <strong id="acct_balance">$20.00</strong></span>
+                        <div class="button-vstack">
+                            <a href="/attendee/profile"><button class="button-info">Profile</button></a>
+                            <a href="/attendee/logout"><button class="button-warn">Logout</button></a>
+                        </div>
+                        <a href="/donate"><button id="button-donate" class="button-good">Donate!</button></a>
+                    </div>
+                </header>
+            </div>
+        </div>
+        <div id="scroll-content">
+            <div class="edge-padding">
+                <main>
+                    <section>
+                        <p id="donation-total">
+                            <strong>$123.45</strong> raised so far. Keep up the good work everyone!
+                        </p>
+                    </section>
+                    <section class="pad-bottom">
+                        <h1>Create Your Donation Portal Account</h1>
+                        <p>
+                            To donate to events, or see more information, you'll need an account in our
+                            system. Create one here, or
+                            <a href="/attendee/login">
+                                login to an existing account.
+                            </a>
+                        </p>
+                        <form method="post">
+                            <div class="pad-bottom">
+                                <label for="username-field">Username:</label>
+                                <input name="username" id="username-field" type="text"
+                                       minlength="3"
+                                       maxlength="15">
+                            </div>
+                            <div class="pad-bottom">
+                                <label for="email-field">Email:</label>
+                                <input name="email" id="email-field" type="email">
+                            </div>
+                            <div class="pad-bottom">
+                                <label for="full-name-field">Full Name:</label>
+                                <input name="full-name" id="full-name-field" type="text">
+                            </div>
+                            <div>
+                                <label for="short-name-field">Short Name:</label>
+                                <input name="short-name" id="short-name-field" type="text">
+                            </div>
+                            <hr class="form-rule">
+                            <div class="pad-bottom">
+                                <label for="password-field">Password:</label>
+                                <input name="password" id="password-field" type="password"
+                                       minlength="8"
+                                       maxlength="50">
+                            </div>
+                            <div>
+                                <label for="password-confirm-field">Password (again):</label>
+                                <input name="password-confirm" id="password-confirm-field" type="password"
+                                       minlength="8"
+                                       maxlength="50">
+                            </div>
+                            <hr class="form-rule">
+                            <p>
+                                <strong>What clubs are you a member of?</strong>
+                            </p>
+                            <div>
+                                <input type="checkbox" id="pcs-check" name="pcs-member">
+                                <label for="pcs-check">Programming Competition Society</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="ucc-check" name="ucc-member">
+                                <label for="ucc-check">University Computer Club</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="unigames-check" name="unigames-member">
+                                <label for="unigames-check">Unigames</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="unisfa-check" name="unisfa-member">
+                                <label for="unisfa-check">UniSFA</label>
+                            </div>
+                            <div class="input-div">
+                                <input type="submit" value="Create Account" class="button-good">
+                            </div>
+                        </form>
+                    </section>
+                    <section>
+                        <p><a href="/">Go back...</a></p>
+                    </section>
+                </main>
+                <footer>
+                    <div id="footer-content">
+                        <em>Made by Felix von Perger and James Arcus</em>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Donate to Charity unVigil</title>
+        <link rel="stylesheet" href="/static/main.css">
+    </head>
+    <body>
+        <div id="fixed-banner">
+            <div class="edge-padding">
+                <header>
+                    <div id="header-content">
+                        <span>Balance: <strong id="acct_balance">$20.00</strong></span>
+                        <div class="button-vstack">
+                            <a href="/attendee/profile"><button class="button-info">Profile</button></a>
+                            <a href="/attendee/logout"><button class="button-warn">Logout</button></a>
+                        </div>
+                        <a href="/donate"><button id="button-donate" class="button-good">Donate!</button></a>
+                    </div>
+                </header>
+            </div>
+        </div>
+        <div id="scroll-content">
+            <div class="edge-padding">
+                <main>
+                    <section>
+                        <p id="donation-total">
+                            <strong>$123.45</strong> raised so far. Keep up the good work everyone!
+                        </p>
+                    </section>
+                    <section class="pad-bottom">
+                        <h1>Donate to an Event</h1>
+                        <p>
+                            <em>Don't have enough balance? <a href="/pay">Add more here.</a></em>
+                        </p>
+                        <form method="post">
+                            <div class="pad-bottom">
+                                <label for="event-selector">Event:</label>
+                                <select name="event" id="event-selector">
+                                     <option value="d_d_oneshot">D &amp; D Oneshot</option>
+                                     <option value="artemis">Artemis LAN</option>
+                                 </select>
+                            </div>
+                            <div class="pad-bottom">
+                                <label for="amount-box">Amount:</label>
+                                $<input name="amount" id="amount-box" type="number"
+                                        value="5"
+                                        min="1"
+                                        max="50">
+                            </div>
+                            <div class="input-div">
+                                <input type="submit" value="Donate!" class="button-good">
+                            </div>
+                        </form>
+                    </section>
+                    <section>
+                        <p><a href="/">Go back...</a></p>
+                    </section>
+                </main>
+                <footer>
+                    <div id="footer-content">
+                        <em>Made by Felix von Perger and James Arcus</em>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </body>
+</html>
