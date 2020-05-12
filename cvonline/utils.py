@@ -19,3 +19,8 @@ def login_forbidden(function=None, redirect_field_name=None, redirect_to=LOGGED_
 
 def do_donate(attendee_id, event_ref, amount):
     pass # placeholder
+
+def meets_pw_requirements(new, confirm):
+    if new != confirm: return False
+    if 8 > len(new) > 50: return False
+    return True

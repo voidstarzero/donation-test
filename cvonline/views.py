@@ -8,7 +8,7 @@ import django.contrib.auth as auth
 from datetime import datetime
 
 from .models import Club, Event, Attendee, Donation
-from .utils import login_forbidden, do_donate
+from .utils import login_forbidden, do_donate, meets_pw_requirements
 
 # Views are all preliminary until templates are refined
 
@@ -128,10 +128,29 @@ def pay(request):
 
 @login_required(login_url='/attendee/login')
 def change_password(request):
-    context = {
-        'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
-    }
-    return render(request, 'attendee/change_password.html', context)
+    if request.method == 'POST':
+        try:
+            old = request.POST['old_password']
+            new = request.POST['new_password']
+            confirm = request.POST['new_password_confirm']
+
+            # check user's id again
+            user = auth.authenticate(username=request.user.username, password=old)
+            if user is not None and meets_pw_requirements(new, confirm):
+                user.set_password(new)
+                user.save()
+                return HttpResponseRedirect('/attendee/login')
+            else:
+                return HttpResponseRedirect('/attendee/change_password')
+
+        except (KeyError, ValueError):
+            raise SuspiciousOperation('Wrong parameters to change password')
+
+    elif request.method == 'GET':
+        context = {
+            'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
+        }
+        return render(request, 'attendee/change_password.html', context)
 
 @login_forbidden(redirect_to='/attendee/logout')
 def create_attendee(request):
@@ -142,10 +161,25 @@ def create_attendee(request):
 
 @login_forbidden(redirect_to='/attendee/logout')
 def login(request):
-    context = {
-        'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
-    }
-    return render(request, 'attendee/login.html', context)
+    if request.method == 'POST':
+        try:
+            username = request.POST['username']
+            password = request.POST['password']
+            user = auth.authenticate(request, username=username, password=password)
+            if user is not None:
+                auth.login(request, user)
+                return HttpResponseRedirect('/')
+            else:
+                return HttpResponseRedirect('/attendee/login')
+
+        except (KeyError, ValueError):
+            raise SuspiciousOperation('Wrong parameters to login')
+
+    elif request.method == 'GET':
+        context = {
+            'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
+        }
+        return render(request, 'attendee/login.html', context)
 
 @login_required(login_url='/attendee/login')
 def logout(request):
