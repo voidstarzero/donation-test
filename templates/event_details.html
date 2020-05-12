@@ -22,7 +22,7 @@
                     {% endif %}
                 </strong>
                 {% for organizer in organizers %}
-                {{ organizer.full_name }}{% if not forloop.last %},{% endif %}
+                {{ organizer.short_name }}{% if not forloop.last %},{% endif %}
                 {% endfor %}
                 {% endwith %}
             </p>

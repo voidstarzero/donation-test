@@ -5,6 +5,7 @@ User = auth.get_user_model()
 
 class Club(models.Model):
     ref_name    = models.CharField(primary_key=True, max_length=15, blank=False, null=False)
+    short_name  = models.CharField(max_length=15, null=False)
     full_name   = models.CharField(max_length=120, null=False)
     page_link   = models.CharField(max_length=120, blank=False)
     description = models.TextField(null=False)
