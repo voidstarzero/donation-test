@@ -1,19 +1,9 @@
 <h2>Club Leaderboard</h2>
 <div class="multi-table">
+    {% for club in clubs %}
     <div class="multi-row">
-        <span><a href="/clubs/unigames">Unigames</a></span>
-        <strong>$1234.56</strong>
+        <span><a href="/clubs/{{ club.ref_name }}">{{ club.short_name }}</a></span>
+        <strong>${{ club.balance.balance }}</strong>
     </div>
-    <div class="multi-row">
-        <span><a href="/clubs/unisfa">Unisfa</a></span>
-        <strong>$675.45</strong>
-    </div>
-    <div class="multi-row">
-        <span><a href="/clubs/ucc">UCC</a></span>
-        <strong>$435.30</strong>
-    </div>
-    <div class="multi-row">
-        <span><a href="/clubs/pcs">PCS</a></span>
-        <strong>$123.43</strong>
-    </div>
+    {% endfor %}
 </div>

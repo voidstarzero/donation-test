@@ -3,13 +3,16 @@ from django.shortcuts import render
 from django.core.exceptions import ObjectDoesNotExist, SuspiciousOperation
 from django.contrib.auth.decorators import login_required
 
-from .models import Club, Event
+from .models import Club, Event, Attendee
 from .utils import do_donate
 
 # Views are all preliminary until templates are refined
 
 def index(request):
-    return render(request, 'index.html')
+    context = {
+        'attendees': Attendee.objects.all().order_by('-balance__cumulative'),
+    }
+    return render(request, 'index.html', context)
 
 def about(request):
     context = {
@@ -18,16 +21,30 @@ def about(request):
     return render(request, 'about.html', context)
 
 def leaderboard_overview(request):
-    return render(request, 'leaderboards/index.html')
+    context = {
+        'attendees': Attendee.objects.all().order_by('-balance__cumulative'),
+        'events': Event.objects.all().order_by('-balance__balance'),
+        'clubs': Club.objects.all().order_by('-balance__balance'),
+    }
+    return render(request, 'leaderboards/index.html', context)
 
 def leaderboard_by_attendee(request):
-    return render(request, 'leaderboards/by_attendee.html')
+    context = {
+        'attendees': Attendee.objects.all().order_by('-balance__cumulative'),
+    }
+    return render(request, 'leaderboards/by_attendee.html', context)
 
 def leaderboard_by_event(request):
-    return render(request, 'leaderboards/by_event.html')
+    context = {
+        'events': Event.objects.all().order_by('-balance__balance'),
+    }
+    return render(request, 'leaderboards/by_event.html', context)
 
 def leaderboard_by_club(request):
-    return render(request, 'leaderboards/by_club.html')
+    context = {
+        'clubs': Club.objects.all().order_by('-balance__balance'),
+    }
+    return render(request, 'leaderboards/by_club.html', context)
 
 def event_list(request):
     context = {
