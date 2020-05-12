@@ -55,7 +55,15 @@ def leaderboard_by_club(request):
     return render(request, 'leaderboards/by_club.html', context)
 
 def event_list(request):
+    now = datetime.now()
     context = {
+        'current_events': (Event.objects.filter(start_time__lte=now)
+                                        .filter(end_time__gte=now)
+                                        .order_by('start_time')),
+        'upcoming_events': (Event.objects.filter(start_time__gte=now)
+                                         .order_by('start_time')),
+        'past_events': (Event.objects.filter(end_time__lte=now)
+                                     .order_by('start_time')),
         'events': Event.objects.all(),
     }
     return render(request, 'event_list.html', context)
