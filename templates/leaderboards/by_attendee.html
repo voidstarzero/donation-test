@@ -1,61 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Attendee Leaderboard - Charity unVigil Donation Tracker</title>
-        <link rel="stylesheet" href="/static/main.css">
-    </head>
-    <body>
-        <div id="fixed-banner">
-            <div class="edge-padding">
-                <header>
-                    <div id="header-content">
-                        <span>Balance: <strong id="acct_balance">$20.00</strong></span>
-                        <div class="button-vstack">
-                            <a href="/attendee/profile"><button class="button-info">Profile</button></a>
-                            <a href="/attendee/logout"><button class="button-warn">Logout</button></a>
-                        </div>
-                        <a href="/donate"><button id="button-donate" class="button-good">Donate!</button></a>
-                    </div>
-                </header>
-            </div>
+{% extends "base.html" %}
+
+{% block title %}Attendee Leaderboard - Charity unVigil Donation Tracker{% endblock %}
+
+{% block content %}
+<section class="pad-bottom">
+    <h1>Attendee Leaderboard</h1>
+    <div class="multi-table">
+        <div class="multi-row">
+            <span>Michael Jackson</span>
+            <strong>$1234.56</strong>
         </div>
-        <div id="scroll-content">
-            <div class="edge-padding">
-                <main>
-                    <section>
-                        <p id="donation-total">
-                            <strong>$123.45</strong> raised so far. Keep up the good work everyone!
-                        </p>
-                    </section>
-                    <section class="pad-bottom">
-                        <h1>Attendee Leaderboard</h1>
-                        <div class="multi-table">
-                            <div class="multi-row">
-                                <span>Michael Jackson</span>
-                                <strong>$1234.56</strong>
-                            </div>
-                            <div class="multi-row">
-                                <span>Dame Judy Dench</span>
-                                <strong>$74.12</strong>
-                            </div>
-                            <div class="multi-row">
-                                <span>Cathy Freeman</span>
-                                <strong>$33.30</strong>
-                            </div>
-                        </div>
-                    </section>
-                    <section>
-                        <p><a href="/leaderboards/">Go back...</a></p>
-                    </section>
-                </main>
-                <footer>
-                    <div id="footer-content">
-                        <em>Made by Felix von Perger and James Arcus</em>
-                    </div>
-                </footer>
-            </div>
+        <div class="multi-row">
+            <span>Dame Judy Dench</span>
+            <strong>$74.12</strong>
         </div>
-    </body>
-</html>
+        <div class="multi-row">
+            <span>Cathy Freeman</span>
+            <strong>$33.30</strong>
+        </div>
+    </div>
+</section>
+<section>
+    <p><a href="/leaderboards/">Go back...</a></p>
+</section>
+{% endblock %}

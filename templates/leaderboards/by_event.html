@@ -1,64 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Event Leaderboard - Charity unVigil Donation Tracker</title>
-        <link rel="stylesheet" href="/static/main.css">
-    </head>
-    <body>
-        <div id="fixed-banner">
-            <div class="edge-padding">
-                <header>
-                    <div id="header-content">
-                        <span>Balance: <strong id="acct_balance">$20.00</strong></span>
-                        <div class="button-vstack">
-                            <a href="/attendee/profile"><button class="button-info">Profile</button></a>
-                            <a href="/attendee/logout"><button class="button-warn">Logout</button></a>
-                        </div>
-                        <a href="/donate"><button id="button-donate" class="button-good">Donate!</button></a>
-                    </div>
-                </header>
-            </div>
+{% extends "base.html" %}
+
+{% block title %}Event Leaderboard - Charity unVigil Donation Tracker{% endblock %}
+
+{% block content %}
+<section class="pad-bottom">
+    <h2>Event Leaderboard</h2>
+    <div class="multi-table">
+        <div class="multi-row">
+            <a href="/events/d_d_oneshot">D&D Oneshot</a>
+            <span>Unigames</span>
+            <strong>$12342.45</strong>
         </div>
-        <div id="scroll-content">
-            <div class="edge-padding">
-                <main>
-                    <section>
-                        <p id="donation-total">
-                            <strong>$123.45</strong> raised so far. Keep up the good work everyone!
-                        </p>
-                    </section>
-                    <section class="pad-bottom">
-                        <h2>Event Leaderboard</h2>
-                        <div class="multi-table">
-                            <div class="multi-row">
-                                <a href="/events/d_d_oneshot">D&D Oneshot</a>
-                                <span>Unigames</span>
-                                <strong>$12342.45</strong>
-                            </div>
-                            <div class="multi-row">
-                                <a href="/events/screencheat">Screencheat</a>
-                                <span>UCC</span>
-                                <strong>$3245.22</strong>
-                            </div>
-                            <div class="multi-row">
-                                <a href="/events/really_long">Really Long Event Name to see if things break</a>
-                                <span>UCC</span>
-                                <strong>$456.43</strong>
-                            </div>
-                        </div>
-                    </section>
-                    <section>
-                        <p><a href="/leaderboards/">Go back...</a></p>
-                    </section>
-                </main>
-                <footer>
-                    <div id="footer-content">
-                        <em>Made by Felix von Perger and James Arcus</em>
-                    </div>
-                </footer>
-            </div>
+        <div class="multi-row">
+            <a href="/events/screencheat">Screencheat</a>
+            <span>UCC</span>
+            <strong>$3245.22</strong>
         </div>
-    </body>
-</html>
+        <div class="multi-row">
+            <a href="/events/really_long">Really Long Event Name to see if things break</a>
+            <span>UCC</span>
+            <strong>$456.43</strong>
+        </div>
+    </div>
+</section>
+<section>
+    <p><a href="/leaderboards/">Go back...</a></p>
+</section>
+{% endblock %}
