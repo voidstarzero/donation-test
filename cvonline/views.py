@@ -7,7 +7,7 @@ from django.db.models import Sum
 from datetime import datetime
 
 from .models import Club, Event, Attendee
-from .utils import do_donate
+from .utils import login_forbidden, do_donate
 
 # Views are all preliminary until templates are refined
 
@@ -118,9 +118,33 @@ def donate(request):
         }
         return render(request, 'donate.html', context)
 
-@login_required(login_url='attendee/login')
+@login_required(login_url='/attendee/login')
 def pay(request):
     context = {
         'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
     }
     return render(request, 'pay.html', context)
+
+@login_required(login_url='/attendee/login')
+def change_password(request):
+    return render(request, 'attendee/change_password.html')
+
+@login_forbidden(redirect_to='/attendee/logout')
+def create_attendee(request):
+    return render(request, 'attendee/create.html')
+
+@login_forbidden(redirect_to='/attendee/logout')
+def login(request):
+    return render(request, 'attendee/login.html')
+
+@login_required(login_url='/attendee/login')
+def logout(request):
+    return render(request, 'attendee/logout.html')
+
+@login_required(login_url='/attendee/login')
+def attendee_profile(request):
+    return render(request, 'attendee/profile.html')
+
+@login_forbidden(redirect_to='/attendee/logout')
+def reset_password(request):
+    return render(request, 'attendee/reset_password.html')

@@ -31,5 +31,11 @@ urlpatterns = [
     path('clubs/<str:club>', views.club_details, name='club_details'),
     path('donate', views.donate, name='donate'),
     path('pay', views.pay, name='pay'),
+    path('attendee/change_password', views.change_password, name='change_password'),
+    path('attendee/create', views.create_attendee, name='create_attendee'),
+    path('attendee/login', views.login, name='login'),
+    path('attendee/logout', views.logout, name='logout'),
+    path('attendee/profile', views.attendee_profile, name='attendee_profile'),
+    path('attendee/reset_password', views.reset_password, name='reset_password'),
     path('admin/', admin.site.urls), # leave to allow access to prebuilt admin site
 ]
