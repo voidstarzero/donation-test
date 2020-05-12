@@ -127,24 +127,42 @@ def pay(request):
 
 @login_required(login_url='/attendee/login')
 def change_password(request):
-    return render(request, 'attendee/change_password.html')
+    context = {
+        'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
+    }
+    return render(request, 'attendee/change_password.html', context)
 
 @login_forbidden(redirect_to='/attendee/logout')
 def create_attendee(request):
-    return render(request, 'attendee/create.html')
+    context = {
+        'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
+    }
+    return render(request, 'attendee/create.html', context)
 
 @login_forbidden(redirect_to='/attendee/logout')
 def login(request):
-    return render(request, 'attendee/login.html')
+    context = {
+        'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
+    }
+    return render(request, 'attendee/login.html', context)
 
 @login_required(login_url='/attendee/login')
 def logout(request):
-    return render(request, 'attendee/logout.html')
+    context = {
+        'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
+    }
+    return render(request, 'attendee/logout.html', context)
 
 @login_required(login_url='/attendee/login')
 def attendee_profile(request):
-    return render(request, 'attendee/profile.html')
+    context = {
+        'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
+    }
+    return render(request, 'attendee/profile.html', context)
 
 @login_forbidden(redirect_to='/attendee/logout')
 def reset_password(request):
-    return render(request, 'attendee/reset_password.html')
+    context = {
+        'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
+    }
+    return render(request, 'attendee/reset_password.html', context)
