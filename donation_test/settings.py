@@ -53,7 +53,7 @@ ROOT_URLCONF = 'donation_test.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -102,9 +102,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+DATE_INPUT_FORMATS = ("%d-%m-%y")
 
-TIME_ZONE = 'UTC'
+LANGUAGE_CODE = 'en-au'
+
+TIME_ZONE = 'Australia/Perth'
 
 USE_I18N = True
 
@@ -118,3 +120,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+LOGIN_REDIRECT_URL = '/'
