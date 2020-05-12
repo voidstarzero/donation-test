@@ -6,7 +6,7 @@ from django.db.models import Sum
 
 from datetime import datetime
 
-from .models import Club, Event, Attendee
+from .models import Club, Event, Attendee, Donation
 from .utils import login_forbidden, do_donate
 
 # Views are all preliminary until templates are refined
@@ -158,5 +158,6 @@ def attendee_profile(request):
     context = {
         'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         'attendee': Attendee.objects.get(user=request.user.id),
+        'contributions': Donation.objects.filter(attendee_from=request.user.id).order_by('-timestamp'),
     }
     return render(request, 'attendee/profile.html', context)
