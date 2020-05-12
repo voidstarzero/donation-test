@@ -1,8 +1,9 @@
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, SuspiciousOperation
 
 from .models import Club, Event
+from .utils import do_donate
 
 # Views are all preliminary until templates are refined
 
@@ -54,7 +55,22 @@ def club_details(request, club):
         raise Http404('Club does not exist')
 
 def donate(request):
-    return render(request, 'donate.html')
+    if request.method == 'POST':
+        try:
+            event_ref = request.POST['event']
+            amount = request.POST['amount']
+            do_donate(request.user.attendee_info.user, event_ref, amount)
+            return HttpResponseRedirect('/')
+
+        except (KeyError, ValueError):
+            raise SuspiciousOperation('Wrong parameters to donate')
+
+    elif request.method == 'GET':
+        context = {
+            'events': Event.objects.all(),
+            'selected': request.GET.get('event'),
+        }
+        return render(request, 'donate.html', context)
 
 def pay(request):
     return render(request, 'pay.html')

@@ -9,11 +9,16 @@
     <em>Don't have enough balance? <a href="/pay">Add more here.</a></em>
     </p>
     <form method="post">
+        {% csrf_token %}
         <div class="pad-bottom">
             <label for="event-selector">Event:</label>
             <select name="event" id="event-selector">
-                <option value="d_d_oneshot">D &amp; D Oneshot</option>
-                <option value="artemis">Artemis LAN</option>
+                {% for event in events %}
+                <option value="{{ event.ref_name }}"
+                        {% if event.ref_name == selected %}selected{% endif %}>
+                    {{ event.full_name }}
+                </option>
+                {% endfor %}
             </select>
         </div>
         <div class="pad-bottom">
