@@ -25,7 +25,10 @@ def leaderboard_by_club(request):
     return render(request, 'leaderboards/by_club.html')
 
 def event_list(request):
-    return render(request, 'events/list.html')
+    context = {
+        'events': Event.objects.all(),
+    }
+    return render(request, 'event_list.html', context)
 
 def event_details(request, event):
     try:
