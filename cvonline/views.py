@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.core.exceptions import ObjectDoesNotExist, SuspiciousOperation
+from django.contrib.auth.decorators import login_required
 
 from .models import Club, Event
 from .utils import do_donate
@@ -54,6 +55,7 @@ def club_details(request, club):
     except ObjectDoesNotExist:
         raise Http404('Club does not exist')
 
+@login_required(login_url='/attendee/login')
 def donate(request):
     if request.method == 'POST':
         try:
@@ -72,5 +74,6 @@ def donate(request):
         }
         return render(request, 'donate.html', context)
 
+@login_required(login_url='attendee/login')
 def pay(request):
     return render(request, 'pay.html')
