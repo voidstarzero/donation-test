@@ -1,12 +1,15 @@
 {% extends "base.html" %}
+{% load mathfilters %}
 
 {% block title %}Profile - Charity unVigil Donation Tracker{% endblock %}
 
 {% block content %}
 <section class="club-title">
-    <h1>Welcome, <em id="my-short-name">James</em></h1>
-    <p><strong>Current balance:</strong> $20.00</p>
-    <p><strong>Donated so far:</strong> $17.00</p>
+    <h1>Welcome, <em id="my-short-name">{{ user.first_name }}</em></h1>
+    {% with balance=attendee.balance %}
+    <p><strong>Current balance:</strong> ${{ balance.balance }}</p>
+    <p><strong>Donated so far:</strong> ${{ balance.cumulative|sub:balance.balance }}</p>
+    {% endwith %}
     <div class="right pad-bottom">
         <a href="/pay"><button class="button-good">Add balance</button></a>
         <a href="/donate"><button class="button-good">Donate now!</button></a>

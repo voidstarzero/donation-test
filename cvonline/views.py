@@ -157,6 +157,7 @@ def logout(request):
 def attendee_profile(request):
     context = {
         'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
+        'attendee': Attendee.objects.get(user=request.user.id),
     }
     return render(request, 'attendee/profile.html', context)
 
