@@ -19,7 +19,7 @@ class Event(models.Model):
     full_name   = models.CharField(max_length=120, null=False)
     start_time  = models.DateTimeField(null=False)
     end_time    = models.DateTimeField(null=True) # if event end is null, it's consider to be 'all day'
-    page_link   = models.CharField(max_length=120, blank=False)
+    page_link   = models.CharField(max_length=120, blank=True)
     description = models.TextField(null=False, blank=True)
     organizers  = models.ManyToManyField(Club, related_name='events')
 
