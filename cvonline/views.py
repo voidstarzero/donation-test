@@ -1,5 +1,8 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render
+from django.core.exceptions import ObjectDoesNotExist
+
+from .models import Club
 
 # Views are all preliminary until templates are refined
 
@@ -28,7 +31,14 @@ def event_details(request, event):
     return render(request, 'events/{}.html'.format(event))
 
 def club_details(request, club):
-    return render(request, 'clubs/{}.html'.format(club))
+    try:
+        context = {
+            'club': Club.objects.get(ref_name=club),
+        }
+        return render(request, 'club.html', context)
+
+    except ObjectDoesNotExist:
+        raise Http404('Club does not exist')
 
 def donate(request):
     return render(request, 'donate.html')
