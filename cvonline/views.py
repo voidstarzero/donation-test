@@ -10,7 +10,7 @@ from .utils import do_donate
 
 def index(request):
     context = {
-        'attendees': Attendee.objects.all().order_by('-balance__cumulative'),
+            'attendees': Attendee.objects.all().order_by('-balance__cumulative')[:3],
     }
     return render(request, 'index.html', context)
 
@@ -22,9 +22,9 @@ def about(request):
 
 def leaderboard_overview(request):
     context = {
-        'attendees': Attendee.objects.all().order_by('-balance__cumulative'),
-        'events': Event.objects.all().order_by('-balance__balance'),
-        'clubs': Club.objects.all().order_by('-balance__balance'),
+        'attendees': Attendee.objects.all().order_by('-balance__cumulative')[:3],
+        'events': Event.objects.all().order_by('-balance__balance')[:5],
+        'clubs': Club.objects.all().order_by('-balance__balance')[:3],
     }
     return render(request, 'leaderboards/index.html', context)
 
