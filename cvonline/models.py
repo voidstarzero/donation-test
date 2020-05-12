@@ -12,9 +12,22 @@ class Club(models.Model):
     def __str__(self):
         return self.full_name
 
+# Holds the current balance for Attendees and Events
+# For attendee: Undonated & total money
+# For event: Total donations
+class Balance(models.Model):
+    balance     = models.IntegerField(null=False, default=0)
+    cumulative  = models.IntegerField(null=False, default=0)
+    created     = models.DateTimeField(auto_now_add=True)
+    updated     = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '{}: ${} (${})'.format(self.id, self.balance, self.cumulative)
+
 # Holds extra information not stored in the User model
 class Attendee(models.Model):
     user    = models.OneToOneField(User, primary_key=True, related_name='attendee_info', on_delete=models.CASCADE)
+    balance = models.OneToOneField(Balance, related_name='attendee_owner', on_delete=models.PROTECT, null=True)
     clubs   = models.ManyToManyField(Club, related_name='members')
 
     def __str__(self):
@@ -28,6 +41,7 @@ class Event(models.Model):
     end_time    = models.DateTimeField(null=True) # if event end is null, it's consider to be 'all day'
     page_link   = models.CharField(max_length=120, blank=True)
     description = models.TextField(null=False, blank=True)
+    balance     = models.OneToOneField(Balance, related_name='event_owner', on_delete=models.PROTECT, null=True)
     organizers  = models.ManyToManyField(Club, related_name='events')
 
     def __str__(self):
