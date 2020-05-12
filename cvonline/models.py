@@ -43,4 +43,4 @@ class Donation(models.Model):
     def __str__(self):
         attendee = self.attendee_from
         event = self.event_to
-        return '{} to {} ({})'.format(attendee.user.username, event.full_name, self.amount)
+        return '{} to {} (${})'.format(attendee.user.username, event.full_name, self.amount)
