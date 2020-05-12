@@ -1,125 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Charity unVigil Donation Tracker</title>
-        <link rel="stylesheet" href="/static/main.css">
-    </head>
-    <body>
-        <div id="fixed-banner">
-            <div class="edge-padding">
-                <header>
-                    <div id="header-content">
-                        <span>Balance: <strong id="acct_balance">$20.00</strong></span>
-                        <div class="button-vstack">
-                            <a href="/attendee/profile"><button class="button-info">Profile</button></a>
-                            <a href="/attendee/logout"><button class="button-warn">Logout</button></a>
-                        </div>
-                        <a href="/donate"><button id="button-donate" class="button-good">Donate!</button></a>
-                    </div>
-                </header>
-            </div>
+{% extends "base.html" %}
+
+{% block title %}Charity unVigil Donation Tracker{% endblock %}
+
+{% block content %}
+<section>
+    <h1>Welcome to Charity <sup>un</sup>Vigil 2020!</h1>
+    <p>
+    Each year, the clubs of Cameron Hall band themselves together for a celebration
+    of our activities, and fundraising for vital local charities.
+    </p>
+    <p>
+    This year we're bringing charity to you in a new online format, with <em>Charity
+        <sup>un</sup>Vigil</em>. Running across multiple nights in week 10, each of the
+    clubs will be hosting an evening of fundraising activities to support
+    <a href="https://zontahouse.org.au/">Zonta House</a>, a Perth-based organisation
+    supporting women affected by domestic violence.
+    </p>
+    <p><a href="/about">Read more...</a></p>
+</section>
+<section>
+    <h2>What's On?</h2>
+    <h3>Right Now</h3>
+    <div class="multi-table">
+        <div class="multi-row">
+            <a href="/events/d_d_oneshot">D&D Oneshot</a>
+            <span>Unigames</span>
+            <span>8:30 pm - 9:30 pm</span>
         </div>
-        <div id="scroll-content">
-            <div class="edge-padding">
-                <main>
-                    <section>
-                        <p id="donation-total">
-                            <strong>$123.45</strong> raised so far. Keep up the good work everyone!
-                        </p>
-                    </section>
-                    <section>
-                        <h1>Welcome to Charity <sup>un</sup>Vigil 2020!</h1>
-                        <p>
-                            Each year, the clubs of Cameron Hall band themselves together for a celebration
-                            of our activities, and fundraising for vital local charities.
-                        </p>
-                        <p>
-                            This year we're bringing charity to you in a new online format, with <em>Charity
-                            <sup>un</sup>Vigil</em>. Running across multiple nights in week 10, each of the
-                            clubs will be hosting an evening of fundraising activities to support
-                            <a href="https://zontahouse.org.au/">Zonta House</a>, a Perth-based organisation
-                            supporting women affected by domestic violence.
-                        </p>
-                        <p><a href="/about">Read more...</a></p>
-                    </section>
-                    <section>
-                        <h2>What's On?</h2>
-                        <h3>Right Now</h3>
-                        <div class="multi-table">
-                            <div class="multi-row">
-                                <a href="/events/d_d_oneshot">D&D Oneshot</a>
-                                <span>Unigames</span>
-                                <span>8:30 pm - 9:30 pm</span>
-                            </div>
-                            <div class="multi-row">
-                                <a href="/events/screencheat">Screencheat</a>
-                                <span>UCC</span>
-                                <span>9:00 pm - 9:30 pm</span>
-                            </div>
-                            <div class="multi-row">
-                                <a href="/events/really_long">Really Long Event Name to see if things break</a>
-                                <span>UCC</span>
-                                <span>9:00 pm - 10:00 pm</span>
-                            </div>
-                        </div>
-                        <h3>Coming Up</h3>
-                        <div class="multi-table">
-                            <div class="multi-row">
-                                <a href="/events/book_club">Book Club</a>
-                                <span>Unisfa</span>
-                                <span>9:30 pm - 10:30 pm</span>
-                            </div>
-                            <div class="multi-row">
-                                <a href="/events/really_long_2">Really Long Event Name to see if things break</a>
-                                <span>UCC</span>
-                                <span>11:00 pm - 12:00 am</span>
-                            </div>
-                            <div class="multi-row">
-                                <a href="/events/artemis">Artemis</a>
-                                <span>UCC, Unigames, Unisfa</span>
-                                <span>9:45 pm - 10:30 pm</span>
-                            </div>
-                        </div>
-                        <h3>All Night Long</h3>
-                        <div class="multi-table">
-                            <div class="multi-row">
-                                <a href="/events/minecraft">Minecraft with Friends</a>
-                                <span>UCC, Unigames, Unisfa</span>
-                            </div>
-                            <div class="multi-row">
-                                <a href="/events/pcs_contest">Programming unContest</a>
-                                <span>PCS</span>
-                            </div>
-                        </div>
-                        <p><a href="/events/list">More events...</a></p>
-                    </section>
-                    <section>
-                        <h2>Top Donors</h2>
-                        <div class="multi-table">
-                            <div class="multi-row">
-                                <span>Michael Jackson</span>
-                                <strong>$1234.56</strong>
-                            </div>
-                            <div class="multi-row">
-                                <span>Dame Judy Dench</span>
-                                <strong>$74.12</strong>
-                            </div>
-                            <div class="multi-row">
-                                <span>Cathy Freeman</span>
-                                <strong>$33.30</strong>
-                            </div>
-                        </div>
-                        <p><a href="/leaderboards/by_attendee">See the full rankings...</a></p>
-                    </section>
-                </main>
-                <footer>
-                    <div id="footer-content">
-                        <em>Made by Felix von Perger and James Arcus</em>
-                    </div>
-                </footer>
-            </div>
+        <div class="multi-row">
+            <a href="/events/screencheat">Screencheat</a>
+            <span>UCC</span>
+            <span>9:00 pm - 9:30 pm</span>
         </div>
-    </body>
-</html>
+        <div class="multi-row">
+            <a href="/events/really_long">Really Long Event Name to see if things break</a>
+            <span>UCC</span>
+            <span>9:00 pm - 10:00 pm</span>
+        </div>
+    </div>
+    <h3>Coming Up</h3>
+    <div class="multi-table">
+        <div class="multi-row">
+            <a href="/events/book_club">Book Club</a>
+            <span>Unisfa</span>
+            <span>9:30 pm - 10:30 pm</span>
+        </div>
+        <div class="multi-row">
+            <a href="/events/really_long_2">Really Long Event Name to see if things break</a>
+            <span>UCC</span>
+            <span>11:00 pm - 12:00 am</span>
+        </div>
+        <div class="multi-row">
+            <a href="/events/artemis">Artemis</a>
+            <span>UCC, Unigames, Unisfa</span>
+            <span>9:45 pm - 10:30 pm</span>
+        </div>
+    </div>
+    <h3>All Night Long</h3>
+    <div class="multi-table">
+        <div class="multi-row">
+            <a href="/events/minecraft">Minecraft with Friends</a>
+            <span>UCC, Unigames, Unisfa</span>
+        </div>
+        <div class="multi-row">
+            <a href="/events/pcs_contest">Programming unContest</a>
+            <span>PCS</span>
+        </div>
+    </div>
+    <p><a href="/events/list">More events...</a></p>
+</section>
+<section>
+    <h2>Top Donors</h2>
+    <div class="multi-table">
+        <div class="multi-row">
+            <span>Michael Jackson</span>
+            <strong>$1234.56</strong>
+        </div>
+        <div class="multi-row">
+            <span>Dame Judy Dench</span>
+            <strong>$74.12</strong>
+        </div>
+        <div class="multi-row">
+            <span>Cathy Freeman</span>
+            <strong>$33.30</strong>
+        </div>
+    </div>
+    <p><a href="/leaderboards/by_attendee">See the full rankings...</a></p>
+</section>
+{% endblock %}

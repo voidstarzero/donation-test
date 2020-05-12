@@ -1,85 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>About Charity unVigil 2020</title>
-        <link rel="stylesheet" href="/static/main.css">
-    </head>
-    <body>
-        <div id="fixed-banner">
-            <div class="edge-padding">
-                <header>
-                    <div id="header-content">
-                        <span>Balance: <strong id="acct_balance">$20.00</strong></span>
-                        <div class="button-vstack">
-                            <a href="/attendee/profile"><button class="button-info">Profile</button></a>
-                            <a href="/attendee/logout"><button class="button-warn">Logout</button></a>
-                        </div>
-                        <a href="/donate"><button id="button-donate" class="button-good">Donate!</button></a>
-                    </div>
-                </header>
-            </div>
-        </div>
-        <div id="scroll-content">
-            <div class="edge-padding">
-                <main>
-                    <section>
-                        <p id="donation-total">
-                            <strong>$123.45</strong> raised so far. Keep up the good work everyone!
-                        </p>
-                    </section>
-                    <section>
-                        <h1>Charity <sup>un</sup>Vigil Goes Online in 2020!</h1>
-                        <p>
-                            Each year, the clubs of Cameron Hall band themselves together for a celebration
-                            of our activities, and fundraising for vital local charities.
-                        </p>
-                        <p>
-                            This year we're bringing charity to you in a new online format, with <em>Charity
-                            <sup>un</sup>Vigil</em>. Running across multiple nights in week 10, each of the
-                            clubs will be hosting an evening of fundraising activities to support
-                            <a href="https://zontahouse.org.au/">Zonta House</a>, a Perth-based organisation
-                            supporting women affected by domestic violence.
-                        </p>
-                    </section>
-                    <section>
-                        <h2>Event Schedule</h2>
-                        <p><a href="/events/list">View all events...</a></p>
-                    </section>
-                    <section>
-                        <h2>Meet the Clubs</h2>
-                        <h3>PCS</h3>
-                        <p>
-                            The Programmng Competition Society is...
-                        </p>
-                        <p><a href="/clubs/pcs">See more...</a></p>
-                        <h3>UCC</h3>
-                        <p>
-                            The University Computer Club Inc. is...
-                        </p>
-                        <p><a href="/clubs/ucc">See more...</a></p>
-                        <h3>Unigames</h3>
-                        <p>
-                            Unigames is...
-                        </p>
-                        <p><a href="/clubs/unigames">See more...</a></p>
-                        <h3>Unisfa</h3>
-                        <p>
-                            Unisfa is...
-                        </p>
-                        <p><a href="/clubs/unisfa">See more...</a></p>
-                    </section>
-                    <section>
-                        <p><a href="/">Go back...</a></p>
-                    </section>
-                </main>
-                <footer>
-                    <div id="footer-content">
-                        <em>Made by Felix von Perger and James Arcus</em>
-                    </div>
-                </footer>
-            </div>
-        </div>
-    </body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}About Charity unVigil 2020{% endblock %}
+
+{% block content %}
+<section>
+    <h1>Charity <sup>un</sup>Vigil Goes Online in 2020!</h1>
+    <p>
+    Each year, the clubs of Cameron Hall band themselves together for a celebration
+    of our activities, and fundraising for vital local charities.
+    </p>
+    <p>
+    This year we're bringing charity to you in a new online format, with <em>Charity
+        <sup>un</sup>Vigil</em>. Running across multiple nights in week 10, each of the
+    clubs will be hosting an evening of fundraising activities to support
+    <a href="https://zontahouse.org.au/">Zonta House</a>, a Perth-based organisation
+    supporting women affected by domestic violence.
+    </p>
+</section>
+<section>
+    <h2>Event Schedule</h2>
+    <p><a href="/events/list">View all events...</a></p>
+</section>
+<section>
+    <h2>Meet the Clubs</h2>
+    <h3>PCS</h3>
+    <p>
+    The Programmng Competition Society is...
+    </p>
+    <p><a href="/clubs/pcs">See more...</a></p>
+    <h3>UCC</h3>
+    <p>
+    The University Computer Club Inc. is...
+    </p>
+    <p><a href="/clubs/ucc">See more...</a></p>
+    <h3>Unigames</h3>
+    <p>
+    Unigames is...
+    </p>
+    <p><a href="/clubs/unigames">See more...</a></p>
+    <h3>Unisfa</h3>
+    <p>
+    Unisfa is...
+    </p>
+    <p><a href="/clubs/unisfa">See more...</a></p>
+</section>
+<section>
+    <p><a href="/">Go back...</a></p>
+</section>
+{% endblock %}
