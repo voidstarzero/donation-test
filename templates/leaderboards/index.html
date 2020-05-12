@@ -6,9 +6,18 @@
 <section>
     <h1>Charity <sup>un</sup>Vigil Leaderboard</h1>
 </section>
-{% include "leaderboards/event_widget.html" %}
-{% include "leaderboards/club_widget.html" %}
-{% include "leaderboards/attendee_widget.html" %}
+<section>
+    {% include "leaderboards/event_widget.html" %}
+    <p><a href="/leaderboards/by_event">See more...</a></p>
+</section>
+<section>
+    {% include "leaderboards/club_widget.html" %}
+    <p><a href="/leaderboards/by_club">See more...</a></p>
+</section>
+<section>
+    {% include "leaderboards/attendee_widget.html" %}
+    <p><a href="/leaderboards/by_attendee">See more...</a></p>
+</section>
 <section>
     <p><a href="/">Go back...</a></p>
 </section>

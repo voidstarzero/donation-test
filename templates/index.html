@@ -71,21 +71,7 @@
     <p><a href="/leaderboards/by_event">See event leaderboard...</a></p>
 </section>
 <section>
-    <h2>Top Donors</h2>
-    <div class="multi-table">
-        <div class="multi-row">
-            <span>Michael Jackson</span>
-            <strong>$1234.56</strong>
-        </div>
-        <div class="multi-row">
-            <span>Dame Judy Dench</span>
-            <strong>$74.12</strong>
-        </div>
-        <div class="multi-row">
-            <span>Cathy Freeman</span>
-            <strong>$33.30</strong>
-        </div>
-    </div>
+    {% include "leaderboards/attendee_widget.html" %}
     <p><a href="/leaderboards/by_attendee">See the full rankings...</a></p>
 </section>
 {% endblock %}
