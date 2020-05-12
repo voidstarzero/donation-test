@@ -10,7 +10,10 @@ def index(request):
     return render(request, 'index.html')
 
 def about(request):
-    return render(request, 'about.html')
+    context = {
+        'clubs': Club.objects.all(),
+    }
+    return render(request, 'about.html', context)
 
 def leaderboard_overview(request):
     return render(request, 'leaderboards/index.html')
