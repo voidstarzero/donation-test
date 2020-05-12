@@ -1,90 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>My Profile - Charity unVigil Donation Tracker</title>
-        <link rel="stylesheet" href="/static/main.css">
-    </head>
-    <body>
-        <div id="fixed-banner">
-            <div class="edge-padding">
-                <header>
-                    <div id="header-content">
-                        <span>Balance: <strong id="acct_balance">$20.00</strong></span>
-                        <div class="button-vstack">
-                            <a href="/attendee/profile"><button class="button-info">Profile</button></a>
-                            <a href="/attendee/logout"><button class="button-warn">Logout</button></a>
-                        </div>
-                        <a href="/donate"><button id="button-donate" class="button-good">Donate!</button></a>
-                    </div>
-                </header>
-            </div>
+{% extends "base.html" %}
+
+{% block title %}Profile - Charity unVigil Donation Tracker{% endblock %}
+
+{% block content %}
+<section class="club-title">
+    <h1>Welcome, <em id="my-short-name">James</em></h1>
+    <p><strong>Current balance:</strong> $20.00</p>
+    <p><strong>Donated so far:</strong> $17.00</p>
+    <div class="right pad-bottom">
+        <a href="/pay"><button class="button-good">Add balance</button></a>
+        <a href="/donate"><button class="button-good">Donate now!</button></a>
+    </div>
+</section>
+<section>
+    <h2>Your Contributions</h2>
+    <div class="multi-table pad-bottom">
+        <div class="multi-row">
+            <a href="/events/really_long">Really Long Event Name to see if things break</a>
+            <strong>$10.00</strong>
         </div>
-        <div id="scroll-content">
-            <div class="edge-padding">
-                <main>
-                    <section>
-                        <p id="donation-total">
-                            <strong>$123.45</strong> raised so far. Keep up the good work everyone!
-                        </p>
-                    </section>
-                    <section class="club-title">
-                        <h1>Welcome, <em id="my-short-name">James</em></h1>
-                        <p><strong>Current balance:</strong> $20.00</p>
-                        <p><strong>Donated so far:</strong> $17.00</p>
-                        <div class="right pad-bottom">
-                            <a href="/pay"><button class="button-good">Add balance</button></a>
-                            <a href="/donate"><button class="button-good">Donate now!</button></a>
-                        </div>
-                    </section>
-                    <section>
-                        <h2>Your Contributions</h2>
-                        <div class="multi-table pad-bottom">
-                            <div class="multi-row">
-                                <a href="/events/really_long">Really Long Event Name to see if things break</a>
-                                <strong>$10.00</strong>
-                            </div>
-                            <div class="multi-row">
-                                <a href="/events/screencheat">Screencheat</a>
-                                <strong>$7.00</strong>
-                            </div>
-                        </div>
-                    </section>
-                    <section>
-                        <h2>Action History</h2>
-                        <div class="multi-table pad-bottom">
-                            <div class="multi-row">
-                                <span>21:23 - <em>Screencheat</em></span>
-                                <strong>$2.00</strong>
-                                <em>donation</em>
-                            </div>
-                            <div class="multi-row">
-                                <span>21:12 - <em>Really Long Event Name to see if things break</em></span>
-                                <strong>$10.00</strong>
-                                <em>donation</em>
-                            </div>
-                            <div class="multi-row">
-                                <span>21:06 - <em>Screencheat</em></span>
-                                <strong>$5.00</strong>
-                                <em>donation</em>
-                            </div>
-                            <div class="multi-row payment-row">
-                                <span>21:00 - <em>Add balance</em></span>
-                                <strong>$37.00</strong>
-                                <em>payment</em>
-                        </div>
-                    </section>
-                    <section>
-                        <p><a href="/">Go back...</a></p>
-                    </section>
-                </main>
-                <footer>
-                    <div id="footer-content">
-                        <em>Made by Felix von Perger and James Arcus</em>
-                    </div>
-                </footer>
-            </div>
+        <div class="multi-row">
+            <a href="/events/screencheat">Screencheat</a>
+            <strong>$7.00</strong>
         </div>
-    </body>
-</html>
+    </div>
+</section>
+<section>
+    <h2>Action History</h2>
+    <div class="multi-table pad-bottom">
+        <div class="multi-row">
+            <span>21:23 - <em>Screencheat</em></span>
+            <strong>$2.00</strong>
+            <em>donation</em>
+        </div>
+        <div class="multi-row">
+            <span>21:12 - <em>Really Long Event Name to see if things break</em></span>
+            <strong>$10.00</strong>
+            <em>donation</em>
+        </div>
+        <div class="multi-row">
+            <span>21:06 - <em>Screencheat</em></span>
+            <strong>$5.00</strong>
+            <em>donation</em>
+        </div>
+        <div class="multi-row payment-row">
+            <span>21:00 - <em>Add balance</em></span>
+            <strong>$37.00</strong>
+            <em>payment</em>
+        </div>
+</section>
+<section>
+    <p><a href="/">Go back...</a></p>
+</section>
+{% endblock %}
