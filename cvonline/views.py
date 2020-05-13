@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
 import django.contrib.auth as auth
 from django.contrib.auth.models import User
+from django.db import transaction
 
 from datetime import datetime
 
@@ -172,25 +173,26 @@ def create_attendee(request):
                     my_clubs.append(key[len(club_prefix):])
 
             if meets_pw_requirements(password, password_confirm):
-                # We need 3 objects made here, a User, an Attendee and a Balance for them
-                user = User.objects.create_user(username, email, password)
-                user.first_name = first_name
-                user.last_name = last_name
-                user.save()
+                with transaction.atomic():
+                    # We need 3 objects made here, a User, an Attendee and a Balance for them
+                    user = User.objects.create_user(username, email, password)
+                    user.first_name = first_name
+                    user.last_name = last_name
+                    user.save()
 
-                # The user needs a new account made for them
-                balance = Balance()
-                balance.save()
+                    # The user needs a new account made for them
+                    balance = Balance()
+                    balance.save()
 
-                # And now the linkage can be made
-                attendee = Attendee(user=user, balance=balance)
-                attendee.save()
+                    # And now the linkage can be made
+                    attendee = Attendee(user=user, balance=balance)
+                    attendee.save()
 
-                # Also, note down which clubs they are part of
-                for club in my_clubs:
-                    ref = Club.objects.get(ref_name=club)
-                    if ref: attendee.clubs.add(ref)
-                attendee.save()
+                    # Also, note down which clubs they are part of
+                    for club in my_clubs:
+                        ref = Club.objects.get(ref_name=club)
+                        if ref: attendee.clubs.add(ref)
+                    attendee.save()
 
                 return HttpResponseRedirect('/attendee/login')
             else:
