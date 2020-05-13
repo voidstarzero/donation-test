@@ -62,7 +62,7 @@
                         errors.forEach(function (error) {
                             console.error('  ' + error.message);
                         });
-                        alert('Payment failed to be created or sent.\nPlease check your input, or contact' +
+                        alert('Payment failed to be created or sent. Please check your input, or contact' +
                               ' the organizers if the problem persists.');
                         return;
                     }
@@ -86,10 +86,13 @@
                         return response.json();
                     }).then(data => {
                         console.log(data);
+                        alert('Thanks for your payment! You\'ll be redirected back to the main site after' +
+                              ' you close this box. If the new balance doesn\'t show straight away, please' +
+                              ' let an event organizer know.');
                         window.location.assign('/');
                     }).catch(err => {
                         console.error(err);
-                        alert('Payment failed to complete!\nPlease try again, or contact the organizers.');
+                        alert('Payment failed to complete! Please try again, or contact the organizers.');
                     });
                 }
             }
