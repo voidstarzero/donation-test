@@ -106,9 +106,30 @@ def donate(request):
     if request.method == 'POST':
         try:
             event_ref = request.POST['event']
-            amount = request.POST['amount']
-            do_donate(request.user.attendee_info.user, event_ref, amount)
-            return HttpResponseRedirect('/')
+            amount = int(request.POST['amount'])
+
+            attendee = request.user.attendee_info
+            event = Event.objects.get(ref_name=event_ref)
+
+            if amount <= attendee.balance.balance:
+                with transaction.atomic():
+                    # Take money from the attendee
+                    attendee.balance.balance -= amount
+                    attendee.balance.save()
+
+                    # Give money to the event
+                    event.balance.balance += amount
+                    event.balance.cumulative += amount
+                    event.balance.save()
+
+                    # Record the transaction
+                    record = Donation(amount=amount, attendee_from=attendee, event_to=event)
+                    record.save()
+
+                return HttpResponseRedirect('/')
+
+            else:
+                return HttpResponseRedirect('/donate?event={}'.format(event_ref))
 
         except (KeyError, ValueError):
             raise SuspiciousOperation('Wrong parameters to donate')
