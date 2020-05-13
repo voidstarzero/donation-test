@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 
 from datetime import datetime
 
-from .models import Club, Event, Attendee, Donation
+from .models import Club, Event, Attendee, Donation, Balance
 from .utils import login_forbidden, do_donate, meets_pw_requirements
 
 # Views are all preliminary until templates are refined
@@ -164,11 +164,34 @@ def create_attendee(request):
             password = request.POST['password']
             password_confirm = request.POST['password_confirm']
 
+            # extract club info
+            club_prefix = 'member_'
+            my_clubs = []
+            for key in request.POST:
+                if key.startswith(club_prefix):
+                    my_clubs.append(key[len(club_prefix):])
+
             if meets_pw_requirements(password, password_confirm):
+                # We need 3 objects made here, a User, an Attendee and a Balance for them
                 user = User.objects.create_user(username, email, password)
                 user.first_name = first_name
                 user.last_name = last_name
                 user.save()
+
+                # The user needs a new account made for them
+                balance = Balance()
+                balance.save()
+
+                # And now the linkage can be made
+                attendee = Attendee(user=user, balance=balance)
+                attendee.save()
+
+                # Also, note down which clubs they are part of
+                for club in my_clubs:
+                    ref = Club.objects.get(ref_name=club)
+                    if ref: attendee.clubs.add(ref)
+                attendee.save()
+
                 return HttpResponseRedirect('/attendee/login')
             else:
                 return HttpResponseReidrect('/attendee/create')
