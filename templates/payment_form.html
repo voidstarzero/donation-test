@@ -12,7 +12,7 @@
             <div class="third" id="sq-expiration-date"></div>
             <div class="third" id="sq-cvv"></div>
             <div class="third" id="sq-postal-code"></div>
-            <button id="sq-creditcard" class="button-credit-card" onclick="onGetCardNonce(event)">Pay $1.00</button>
+            <button id="sq-creditcard" class="button-credit-card" onclick="onGetCardNonce(event)">Pay ${{ amount }}.00</button>
         </div>
         {% csrf_token %}
         <script type="text/javascript">
@@ -73,7 +73,8 @@
                             'X-CSRFToken': csrfToken
                         },
                         body: JSON.stringify({
-                            nonce: nonce
+                            nonce: nonce,
+                            amount: {{ amount }}
                         })
                     }).catch(err => {
                         alert('Network error: ' + err);

@@ -17,8 +17,25 @@ client = Client(
 payments_api = client.payments
 
 def payment_form(request):
+    if request.method != 'GET':
+        raise SuspiciousOperation('Wrong method for payment form')
+
+    fixed = request.GET.get('amount', '')
+    custom = request.GET.get('custom', '')
+
+    if custom != '':
+        amount = int(custom)
+    elif fixed != '':
+        amount = int(fixed)
+    else:
+        amount = 5 # give up
+
+    if amount < 5 or amount > 200:
+        raise SuspiciousOperation('Wrong params for payment form')
+
     context = {
         'sq_app_id': settings.SQUARE_APP_ID,
+        'amount': amount,
     }
     return render(request, 'payment_form.html', context)
 
@@ -26,38 +43,46 @@ def process_payment(request):
     if request.method != 'POST':
         raise SuspiciousOperation('Wrong method for payment processing')
 
-    request_params = json.loads(request.body)
+    try:
+        request_params = json.loads(request.body)
 
-    # length of idempotency_key should be less than 45
-    idempotency_key = str(uuid.uuid1())
+        # length of idempotency_key should be less than 45
+        idempotency_key = str(uuid.uuid1())
 
-    body = {
-        'source_id': request_params['nonce'],
-        'amount_money': {
-            'amount': 100, # $1.00 charge
-            'currency': 'AUD',
-        },
-        'idempotency_key': idempotency_key,
-    }
+        amount = request_params['amount']
+        if amount < 5 or amount > 200:
+            raise SuspiciousOperation('Wrong params for payment processing')
 
-    # setup Square payment manually
-    endpoint = 'https://connect.squareupsandbox.com/v2/payments'
-    access_token = settings.SQUARE_ACCESS_TOKEN
-    headers = {
-        'Square-Version': '2020-04-22',
-        'Authorization': 'Bearer {}'.format(access_token),
-        'Content-Type': 'application/json',
-    }
+        body = {
+            'source_id': request_params['nonce'],
+            'amount_money': {
+                'amount': amount * 100,
+                'currency': 'AUD',
+            },
+            'idempotency_key': idempotency_key,
+        }
 
-    result = requests.post(endpoint, headers=headers, json=body)
+        # setup Square payment manually
+        endpoint = 'https://connect.squareupsandbox.com/v2/payments'
+        access_token = settings.SQUARE_ACCESS_TOKEN
+        headers = {
+            'Square-Version': '2020-04-22',
+            'Authorization': 'Bearer {}'.format(access_token),
+            'Content-Type': 'application/json',
+        }
 
-    if result.status_code == 200:
-        return JsonResponse({
-            'title': 'Payment Successful',
-            'result': result.json(),
-        })
-    else:
-        return JsonResponse({
-            'title': 'Payment Failure',
-            'result': result.json(),
-        }, status=500)
+        result = requests.post(endpoint, headers=headers, json=body)
+
+        if result.status_code == 200:
+            return JsonResponse({
+                'title': 'Payment Successful',
+                'result': result.json(),
+            })
+        else:
+            return JsonResponse({
+                'title': 'Payment Failure',
+                'result': result.json(),
+            }, status=500)
+
+    except (KeyError, ValueError):
+        raise SuspiciousOperation('Wrong params for payment processing')
