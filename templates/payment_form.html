@@ -62,7 +62,8 @@
                         errors.forEach(function (error) {
                             console.error('  ' + error.message);
                         });
-                        alert('Encountered errors, check browser developer console for more details');
+                        alert('Payment failed to be created or sent.\nPlease check your input, or contact' +
+                              ' the organizers if the problem persists.');
                         return;
                     }
                     fetch('process', {
@@ -80,15 +81,15 @@
                         alert('Network error: ' + err);
                     }).then(response => {
                         if (!response.ok) {
-                            return response.json().then(errorInfo => Promise.reject(errorInfo)); //UPDATE HERE
+                            return response.json().then(errorInfo => Promise.reject(errorInfo));
                         }
-                        return response.json(); //UPDATE HERE
+                        return response.json();
                     }).then(data => {
-                        console.log(data); //UPDATE HERE
-                        alert('Payment complete successfully!\nCheck browser developer console for more details');
+                        console.log(data);
+                        window.location.assign('/');
                     }).catch(err => {
                         console.error(err);
-                        alert('Payment failed to complete!\nCheck browser developer console for more details');
+                        alert('Payment failed to complete!\nPlease try again, or contact the organizers.');
                     });
                 }
             }
