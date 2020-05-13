@@ -35,8 +35,24 @@
     </div>
 </section>
 <section>
-    <h2>Event Description</h2>
+    <h2>Description</h2>
     <p>{{ event.description }}</p>
+</section>
+<section>
+    <h2>Event Contributions</h2>
+    <div class="multi-table pad-bottom">
+        {% for contrib in contributions %}
+        <div class="multi-row">
+            <span>
+                {{ contrib.timestamp|date:"d/m, H:i" }} &mdash;
+                {% with user=contrib.attendee_from.user %}
+                {{ user.first_name }} {{ user.last_name }} ({{ user.username }})
+                {% endwith %}
+            </span>
+            <strong>${{ contrib.amount }}</strong>
+        </div>
+        {% endfor %}
+    </div>
 </section>
 <section>
     <p><a href="/">Go back...</a></p>

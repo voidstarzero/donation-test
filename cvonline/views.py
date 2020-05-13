@@ -84,6 +84,7 @@ def event_details(request, event):
         context = {
             'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
             'event': Event.objects.get(ref_name=event),
+            'contributions': Donation.objects.filter(event_to=event).order_by('-timestamp'),
         }
         return render(request, 'event_details.html', context)
 
