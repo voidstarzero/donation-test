@@ -169,7 +169,7 @@ def create_attendee(request):
             club_prefix = 'member_'
             my_clubs = []
             for key in request.POST:
-                if key.startswith(club_prefix):
+                if key.startswith(club_prefix) and request.POST[key] == 'on':
                     my_clubs.append(key[len(club_prefix):])
 
             if meets_pw_requirements(password, password_confirm):
@@ -204,6 +204,7 @@ def create_attendee(request):
     elif request.method == 'GET':
         context = {
             'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
+            'clubs': Club.objects.all().order_by('short_name'),
         }
         return render(request, 'attendee/create.html', context)
 
