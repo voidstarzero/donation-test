@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mathfilters',
     'cvonline',
+    'squarepay',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +126,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 LOGIN_REDIRECT_URL = '/'
 LOGGED_IN_HOME = '/'
+
+# Square-related settings
+SQUARE_APP_ID = 'sandbox-sq0idb-y5KHDvQhJX3xSxyQQAGAig'
+SQUARE_LOCATION = 'W8HRWAK78PC60'
+SQUARE_ACCESS_TOKEN = 'EAAAEEoWyOjrRggrWmEgShDQMx0hF1jemrNQ61pftnzVmfgRxbMRtjtekveBb4Qh'

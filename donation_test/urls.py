@@ -15,9 +15,10 @@ Including another URLconf
 """
 
 from cvonline import views
+from squarepay import views as sq_views
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -36,5 +37,6 @@ urlpatterns = [
     path('attendee/login', views.login, name='login'),
     path('attendee/logout', views.logout, name='logout'),
     path('attendee/profile', views.attendee_profile, name='attendee_profile'),
+    path('squarepay/', include('squarepay.urls')),
     path('admin/', admin.site.urls), # leave to allow access to prebuilt admin site
 ]
