@@ -6,11 +6,8 @@
 <section class="pad-bottom">
     <h1>Create Your Donation Portal Account</h1>
     <p>
-    To donate to events, or see more information, you'll need an account in our
-    system. Create one here, or
-    <a href="/attendee/login">
-        login to an existing account.
-    </a>
+        To donate to events, or see more information, you'll need an account in our
+        system. Create one here, or <a href="/attendee/login">login to an existing account.</a>
     </p>
     <form method="post">
         {% csrf_token %}
@@ -21,18 +18,18 @@
                                                        maxlength="15">
         </div>
         <div class="pad-bottom">
+            <label for="first-name-field">First Name:</label>
+            <input name="first_name" id="first-name-field" type="text" maxlength=30>
+        </div>
+        <div>
+            <label for="last-name-field">Last Name:</label>
+            <input name="last_name" id="last-name-field" type="text" maxlength=150>
+        </div>
+        <hr class="form-rule">
+        <div class="pad-bottom">
             <label for="email-field">Email:</label>
             <input name="email" id="email-field" type="email">
         </div>
-        <div class="pad-bottom">
-            <label for="full-name-field">Full Name:</label>
-            <input name="full-name" id="full-name-field" type="text">
-        </div>
-        <div>
-            <label for="short-name-field">Short Name:</label>
-            <input name="short-name" id="short-name-field" type="text">
-        </div>
-        <hr class="form-rule">
         <div class="pad-bottom">
             <label for="password-field">Password:</label>
             <input name="password" id="password-field" type="password"
@@ -41,28 +38,28 @@
         </div>
         <div>
             <label for="password-confirm-field">Password (again):</label>
-            <input name="password-confirm" id="password-confirm-field" type="password"
+            <input name="password_confirm" id="password-confirm-field" type="password"
                                                                        minlength="8"
                                                                        maxlength="50">
         </div>
         <hr class="form-rule">
         <p>
-        <strong>What clubs are you a member of?</strong>
+        <strong>Which clubs are you a member of?</strong>
         </p>
         <div>
-            <input type="checkbox" id="pcs-check" name="pcs-member">
+            <input type="checkbox" id="pcs-check" name="pcs_member">
             <label for="pcs-check">Programming Competition Society</label>
         </div>
         <div>
-            <input type="checkbox" id="ucc-check" name="ucc-member">
+            <input type="checkbox" id="ucc-check" name="ucc_member">
             <label for="ucc-check">University Computer Club</label>
         </div>
         <div>
-            <input type="checkbox" id="unigames-check" name="unigames-member">
+            <input type="checkbox" id="unigames-check" name="unigames_member">
             <label for="unigames-check">Unigames</label>
         </div>
         <div>
-            <input type="checkbox" id="unisfa-check" name="unisfa-member">
+            <input type="checkbox" id="unisfa-check" name="unisfa_member">
             <label for="unisfa-check">UniSFA</label>
         </div>
         <div class="input-div">

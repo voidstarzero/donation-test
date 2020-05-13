@@ -4,6 +4,7 @@ from django.core.exceptions import ObjectDoesNotExist, SuspiciousOperation
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
 import django.contrib.auth as auth
+from django.contrib.auth.models import User
 
 from datetime import datetime
 
@@ -154,10 +155,32 @@ def change_password(request):
 
 @login_forbidden(redirect_to='/attendee/logout')
 def create_attendee(request):
-    context = {
-        'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
-    }
-    return render(request, 'attendee/create.html', context)
+    if request.method == 'POST':
+        try:
+            username = request.POST['username']
+            first_name = request.POST.get('first_name', '')
+            last_name = request.POST.get('last_name', '')
+            email = request.POST['email']
+            password = request.POST['password']
+            password_confirm = request.POST['password_confirm']
+
+            if meets_pw_requirements(password, password_confirm):
+                user = User.objects.create_user(username, email, password)
+                user.first_name = first_name
+                user.last_name = last_name
+                user.save()
+                return HttpResponseRedirect('/attendee/login')
+            else:
+                return HttpResponseReidrect('/attendee/create')
+
+        except (KeyError, ValueError):
+            raise SuspiciousOperation('Wrong paramters to create')
+
+    elif request.method == 'GET':
+        context = {
+            'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
+        }
+        return render(request, 'attendee/create.html', context)
 
 @login_forbidden(redirect_to='/attendee/logout')
 def login(request):
